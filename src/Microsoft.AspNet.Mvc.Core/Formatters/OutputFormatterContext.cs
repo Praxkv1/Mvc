@@ -3,7 +3,7 @@
 
 using System;
 using System.Text;
-using Microsoft.AspNet.Mvc.HeaderValueAbstractions;
+using Microsoft.AspNet.WebUtilities.Headers;
 
 namespace Microsoft.AspNet.Mvc
 {

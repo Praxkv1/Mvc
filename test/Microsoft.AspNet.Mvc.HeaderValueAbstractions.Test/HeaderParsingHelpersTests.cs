@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using Xunit;
 
-namespace Microsoft.AspNet.Mvc.HeaderValueAbstractions
+namespace Microsoft.AspNet.WebUtilities.Headers
 {
     public class HeaderParsingHelpersTests
     {
@@ -13,15 +13,15 @@ namespace Microsoft.AspNet.Mvc.HeaderValueAbstractions
         public void GetAcceptHeaders_ReturnsParsedHeaders()
         {
             // Arrange & Act
-            var headers = HeaderParsingHelpers.GetAcceptHeaders("application/xml;q=0.4, application/xhtml;q=0.9");
+            var headers = MediaTypeWithQualityHeaderValue.ParseList(new[] { "application/xml;q=0.4, application/xhtml;q=0.9" });
 
             // Assert
             Assert.Equal(2, headers.Count);
-            Assert.Equal("application", headers[0].MediaType);
-            Assert.Equal("xml", headers[0].MediaSubType);
+            Assert.Equal("application", headers[0].Type);
+            Assert.Equal("xml", headers[0].SubType);
             Assert.Equal(0.4, headers[0].Quality);
-            Assert.Equal("application", headers[1].MediaType);
-            Assert.Equal("xhtml", headers[1].MediaSubType);
+            Assert.Equal("application", headers[1].Type);
+            Assert.Equal("xhtml", headers[1].SubType);
             Assert.Equal(0.9, headers[1].Quality);
         }
 
@@ -43,7 +43,7 @@ namespace Microsoft.AspNet.Mvc.HeaderValueAbstractions
         public void GetAcceptHeaders_ReturnsNull(string acceptHeader)
         {
             // Arrange & Act
-            var headers = HeaderParsingHelpers.GetAcceptHeaders(acceptHeader);
+            var headers = MediaTypeWithQualityHeaderValue.ParseList(new[] { acceptHeader });
 
             // Assert
             Assert.Null(headers);
@@ -54,7 +54,7 @@ namespace Microsoft.AspNet.Mvc.HeaderValueAbstractions
         public void GetAcceptCharsetHeaders_ReturnsParsedHeaders()
         {
             // Arrange & Act
-            var headers = HeaderParsingHelpers.GetAcceptCharsetHeaders("utf-8;q=0.7,gzip;q=0.3");
+            var headers = StringWithQualityHeaderValue.ParseList(new[] { "utf-8;q=0.7,gzip;q=0.3" });
 
             // Assert
             Assert.Equal(2, headers.Count);
@@ -81,7 +81,7 @@ namespace Microsoft.AspNet.Mvc.HeaderValueAbstractions
         public void GetAcceptCharsetHeaders_ReturnsNull_IfAcceptHeaderIsEmpty(string charsetHeader)
         {
             // Arrange & Act
-            var headers = HeaderParsingHelpers.GetAcceptCharsetHeaders(charsetHeader);
+            var headers = StringWithQualityHeaderValue.ParseList(new[] { charsetHeader });
 
             // Assert
             Assert.Null(headers);

@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc.HeaderValueAbstractions;
+using Microsoft.AspNet.WebUtilities.Headers;
 using Microsoft.AspNet.PipelineCore;
 using Microsoft.AspNet.Routing;
 using Xunit;

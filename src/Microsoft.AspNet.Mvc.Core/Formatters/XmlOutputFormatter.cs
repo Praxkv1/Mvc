@@ -4,7 +4,7 @@
 using System;
 using System.IO;
 using System.Xml;
-using Microsoft.AspNet.Mvc.HeaderValueAbstractions;
+using Microsoft.AspNet.WebUtilities.Headers;
 
 namespace Microsoft.AspNet.Mvc
 {

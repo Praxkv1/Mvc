@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using Microsoft.AspNet.Mvc.HeaderValueAbstractions;
+using Microsoft.AspNet.WebUtilities.Headers;
 
 namespace Microsoft.AspNet.Mvc
 {

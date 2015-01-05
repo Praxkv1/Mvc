@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc.HeaderValueAbstractions;
+using Microsoft.AspNet.WebUtilities.Headers;
 using Microsoft.Framework.DependencyInjection;
 
 namespace Microsoft.AspNet.Mvc
@@ -62,10 +62,9 @@ namespace Microsoft.AspNet.Mvc
         public virtual IOutputFormatter SelectFormatter(OutputFormatterContext formatterContext,
                                                        IEnumerable<IOutputFormatter> formatters)
         {
-            var incomingAcceptHeader = HeaderParsingHelpers.GetAcceptHeaders(
-                                                formatterContext.ActionContext.HttpContext.Request.Accept);
+            var incomingAcceptHeader = formatterContext.ActionContext.HttpContext.Request.GetTypedHeaders().Accept;
             var sortedAcceptHeaders = SortMediaTypeWithQualityHeaderValues(incomingAcceptHeader)
-                                        .Where(header => header.Quality != HttpHeaderUtilitites.NoMatch)
+                                        .Where(header => header.Quality != HeaderQuality.NoMatch)
                                         .ToArray();
 
             IOutputFormatter selectedFormatter = null;

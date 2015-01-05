@@ -3,7 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.AspNet.Mvc.HeaderValueAbstractions;
+using Microsoft.AspNet.WebUtilities.Headers;
 
 namespace Microsoft.AspNet.Mvc
 {
@@ -47,32 +47,30 @@ namespace Microsoft.AspNet.Mvc
             {
                 if (!mediaType1.MediaType.Equals(mediaType2.MediaType, StringComparison.OrdinalIgnoreCase))
                 {
-                    if (mediaType1.MediaTypeRange == MediaTypeHeaderValueRange.AllMediaRange)
+                    if (mediaType1.AllTypes)
                     {
                         return -1;
                     }
-                    else if (mediaType2.MediaTypeRange == MediaTypeHeaderValueRange.AllMediaRange)
+                    else if (mediaType2.AllTypes)
                     {
                         return 1;
                     }
-                    else if (mediaType1.MediaTypeRange == MediaTypeHeaderValueRange.SubtypeMediaRange &&
-                             mediaType2.MediaTypeRange != MediaTypeHeaderValueRange.SubtypeMediaRange)
+                    else if (mediaType1.AllSubTypes && !mediaType2.AllSubTypes)
                     {
                         return -1;
                     }
-                    else if (mediaType1.MediaTypeRange != MediaTypeHeaderValueRange.SubtypeMediaRange &&
-                             mediaType2.MediaTypeRange == MediaTypeHeaderValueRange.SubtypeMediaRange)
+                    else if (!mediaType1.AllSubTypes && mediaType2.AllSubTypes)
                     {
                         return 1;
                     }
                 }
-                else if (!mediaType1.MediaSubType.Equals(mediaType2.MediaSubType, StringComparison.OrdinalIgnoreCase))
+                else if (!mediaType1.SubType.Equals(mediaType2.SubType, StringComparison.OrdinalIgnoreCase))
                 {
-                    if (mediaType1.MediaTypeRange == MediaTypeHeaderValueRange.SubtypeMediaRange)
+                    if (mediaType1.AllSubTypes)
                     {
                         return -1;
                     }
-                    else if (mediaType2.MediaTypeRange == MediaTypeHeaderValueRange.SubtypeMediaRange)
+                    else if (mediaType2.AllSubTypes)
                     {
                         return 1;
                     }
@@ -85,8 +83,8 @@ namespace Microsoft.AspNet.Mvc
         private static int CompareBasedOnQualityFactor(MediaTypeWithQualityHeaderValue mediaType1,
                                                        MediaTypeWithQualityHeaderValue mediaType2)
         {
-            var mediaType1Quality = mediaType1.Quality ?? HttpHeaderUtilitites.Match;
-            var mediaType2Quality = mediaType2.Quality ?? HttpHeaderUtilitites.Match;
+            var mediaType1Quality = mediaType1.Quality ?? HeaderQuality.Match;
+            var mediaType2Quality = mediaType2.Quality ?? HeaderQuality.Match;
             var qualityDifference = mediaType1Quality - mediaType2Quality;
             if (qualityDifference < 0)
             {

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc.HeaderValueAbstractions;
+using Microsoft.AspNet.WebUtilities.Headers;
 using Microsoft.AspNet.Mvc.ModelBinding;
 using Microsoft.AspNet.Mvc.Routing;
 using Microsoft.AspNet.Routing;
@@ -522,10 +522,10 @@ namespace Microsoft.AspNet.Mvc.Description
             Assert.Equal(4, description.SupportedResponseFormats.Count);
 
             var formats = description.SupportedResponseFormats;
-            Assert.Single(formats, f => f.MediaType.RawValue == "text/json");
-            Assert.Single(formats, f => f.MediaType.RawValue == "application/json");
-            Assert.Single(formats, f => f.MediaType.RawValue == "text/xml");
-            Assert.Single(formats, f => f.MediaType.RawValue == "application/xml");
+            Assert.Single(formats, f => f.MediaType.ToString() == "text/json");
+            Assert.Single(formats, f => f.MediaType.ToString() == "application/json");
+            Assert.Single(formats, f => f.MediaType.ToString() == "text/xml");
+            Assert.Single(formats, f => f.MediaType.ToString() == "application/xml");
         }
 
         [Fact]
@@ -545,8 +545,8 @@ namespace Microsoft.AspNet.Mvc.Description
             Assert.Equal(2, description.SupportedResponseFormats.Count);
 
             var formats = description.SupportedResponseFormats;
-            Assert.Single(formats, f => f.MediaType.RawValue == "text/json");
-            Assert.Single(formats, f => f.MediaType.RawValue == "text/xml");
+            Assert.Single(formats, f => f.MediaType.ToString() == "text/json");
+            Assert.Single(formats, f => f.MediaType.ToString() == "text/xml");
         }
 
         [Fact]
@@ -580,7 +580,7 @@ namespace Microsoft.AspNet.Mvc.Description
             Assert.NotNull(description.ResponseModelMetadata);
 
             var formats = description.SupportedResponseFormats;
-            Assert.Single(formats, f => f.MediaType.RawValue == "text/json");
+            Assert.Single(formats, f => f.MediaType.ToString() == "text/json");
             Assert.Same(formatters[0], formats[0].Formatter);
         }
 

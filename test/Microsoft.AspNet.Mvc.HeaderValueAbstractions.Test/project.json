@@ -1,6 +1,6 @@
 {
     "dependencies": {
-        "Microsoft.AspNet.Mvc.HeaderValueAbstractions": "1.0.0-*",
+        "Microsoft.AspNet.WebUtilities": "1.0.0-*",
         "Microsoft.AspNet.Testing": "1.0.0-*",
         "xunit.runner.kre": "1.0.0-*"
     },

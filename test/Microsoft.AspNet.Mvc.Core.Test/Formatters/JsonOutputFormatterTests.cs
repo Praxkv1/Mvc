@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Mvc.HeaderValueAbstractions;
+using Microsoft.AspNet.WebUtilities.Headers;
 using Moq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -104,9 +104,9 @@ namespace Microsoft.AspNet.Mvc.Core.Test.Formatters
         {
             var request = new Mock<HttpRequest>();
             var headers = new Mock<IHeaderDictionary>();
-            request.Setup(r => r.ContentType).Returns(contentType.RawValue);
+            request.Setup(r => r.ContentType).Returns(contentType.ToString());
             request.SetupGet(r => r.Headers).Returns(headers.Object);
-            request.SetupGet(f => f.AcceptCharset).Returns(contentType.Charset);
+            // TODO: request.SetupGet(f => f.AcceptCharset).Returns(contentType.Charset);
             var response = new Mock<HttpResponse>();
             response.SetupGet(f => f.Body).Returns(new MemoryStream());
             var httpContext = new Mock<HttpContext>();

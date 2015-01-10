@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
-using Microsoft.AspNet.WebUtilities.Headers;
+using Microsoft.AspNet.PipelineCore;
 using Microsoft.AspNet.Routing;
+using Microsoft.Net.Http.Headers;
 using Moq;
 using Xunit;
-using Microsoft.AspNet.PipelineCore;
 
 namespace Microsoft.AspNet.Mvc.Test
 {

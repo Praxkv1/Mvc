@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.PipelineCore.Collections;
-using Microsoft.AspNet.WebUtilities.Headers;
+using Microsoft.Net.Http.Headers;
 using Moq;
 using Xunit;
 

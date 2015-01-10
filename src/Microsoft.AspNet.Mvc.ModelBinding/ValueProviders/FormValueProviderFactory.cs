@@ -3,7 +3,7 @@
 
 using System.Globalization;
 using Microsoft.AspNet.Http;
-using Microsoft.AspNet.WebUtilities.Headers;
+using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNet.Mvc.ModelBinding
 {

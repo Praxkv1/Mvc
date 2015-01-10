@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.PipelineCore;
 using Microsoft.AspNet.Routing;
-using Microsoft.AspNet.WebUtilities.Headers;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.DependencyInjection.Fallback;
 using Microsoft.Framework.OptionsModel;
+using Microsoft.Net.Http.Headers;
 using Moq;
 using Xunit;
 

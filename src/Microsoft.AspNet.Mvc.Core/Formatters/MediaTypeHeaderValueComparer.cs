@@ -11,16 +11,16 @@ namespace Microsoft.AspNet.Mvc
     /// Implementation of <see cref="IComparer{T}"/> that can compare accept media type header fields
     /// based on their quality values (a.k.a q-values).
     /// </summary>
-    public class MediaTypeWithQualityHeaderValueComparer : IComparer<MediaTypeWithQualityHeaderValue>
+    public class MediaTypeHeaderValueComparer : IComparer<MediaTypeHeaderValue>
     {
-        private static readonly MediaTypeWithQualityHeaderValueComparer _mediaTypeComparer =
-                                                                    new MediaTypeWithQualityHeaderValueComparer();
+        private static readonly MediaTypeHeaderValueComparer _mediaTypeComparer =
+                                                                    new MediaTypeHeaderValueComparer();
 
-        private MediaTypeWithQualityHeaderValueComparer()
+        private MediaTypeHeaderValueComparer()
         {
         }
 
-        public static MediaTypeWithQualityHeaderValueComparer QualityComparer
+        public static MediaTypeHeaderValueComparer QualityComparer
         {
             get { return _mediaTypeComparer; }
         }
@@ -31,10 +31,10 @@ namespace Microsoft.AspNet.Mvc
         /// (aka their "q-value"). Values with identical q-values are considered equal (i.e. the result is 0)
         /// with the exception that subtype wildcards are considered less than specific media types and full
         /// wildcards are considered less than subtype wildcards. This allows callers to sort a sequence of
-        /// <see cref="MediaTypeWithQualityHeaderValue"/> following their q-values in the order of specific
+        /// <see cref="MediaTypeHeaderValue"/> following their q-values in the order of specific
         /// media types, subtype wildcards, and last any full wildcards.
         /// </remarks>
-        public int Compare(MediaTypeWithQualityHeaderValue mediaType1, MediaTypeWithQualityHeaderValue mediaType2)
+        public int Compare(MediaTypeHeaderValue mediaType1, MediaTypeHeaderValue mediaType2)
         {
             if (object.ReferenceEquals(mediaType1, mediaType2))
             {
@@ -80,8 +80,8 @@ namespace Microsoft.AspNet.Mvc
             return returnValue;
         }
 
-        private static int CompareBasedOnQualityFactor(MediaTypeWithQualityHeaderValue mediaType1,
-                                                       MediaTypeWithQualityHeaderValue mediaType2)
+        private static int CompareBasedOnQualityFactor(MediaTypeHeaderValue mediaType1,
+                                                       MediaTypeHeaderValue mediaType2)
         {
             var mediaType1Quality = mediaType1.Quality ?? HeaderQuality.Match;
             var mediaType2Quality = mediaType2.Quality ?? HeaderQuality.Match;

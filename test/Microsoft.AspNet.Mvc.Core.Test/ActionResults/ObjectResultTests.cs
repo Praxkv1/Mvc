@@ -289,7 +289,7 @@ namespace Microsoft.AspNet.Mvc.Core.Test.ActionResults
             // For each additional accept header, it is called once.
             // Arrange
             var acceptHeaderCollection = string.IsNullOrEmpty(acceptHeader) ?
-                null : MediaTypeWithQualityHeaderValue.ParseList(new[] { acceptHeader }).ToArray();
+                null : MediaTypeHeaderValue.ParseList(new[] { acceptHeader }).ToArray();
             var stream = new MemoryStream();
             var httpResponse = new Mock<HttpResponse>();
             httpResponse.SetupProperty<string>(o => o.ContentType);

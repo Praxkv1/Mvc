@@ -64,7 +64,7 @@ namespace Microsoft.AspNet.Mvc
                                                        IEnumerable<IOutputFormatter> formatters)
         {
             var incomingAcceptHeader = formatterContext.ActionContext.HttpContext.Request.GetTypedHeaders().Accept;
-            var sortedAcceptHeaders = SortMediaTypeWithQualityHeaderValues(incomingAcceptHeader)
+            var sortedAcceptHeaders = SortMediaTypeHeaderValues(incomingAcceptHeader)
                                         .Where(header => header.Quality != HeaderQuality.NoMatch)
                                         .ToArray();
 
@@ -194,19 +194,19 @@ namespace Microsoft.AspNet.Mvc
             return selectedFormatter;
         }
 
-        private static MediaTypeWithQualityHeaderValue[] SortMediaTypeWithQualityHeaderValues
-                                                    (IEnumerable<MediaTypeWithQualityHeaderValue> headerValues)
+        private static MediaTypeHeaderValue[] SortMediaTypeHeaderValues
+                                                    (IEnumerable<MediaTypeHeaderValue> headerValues)
         {
             if (headerValues == null)
             {
-                return new MediaTypeWithQualityHeaderValue[] { };
+                return new MediaTypeHeaderValue[] { };
             }
 
             // Use OrderBy() instead of Array.Sort() as it performs fewer comparisons. In this case the comparisons
             // are quite expensive so OrderBy() performs better.
             return headerValues.OrderByDescending(headerValue =>
                                                     headerValue,
-                                                    MediaTypeWithQualityHeaderValueComparer.QualityComparer)
+                                                    MediaTypeHeaderValueComparer.QualityComparer)
                                .ToArray();
         }
 

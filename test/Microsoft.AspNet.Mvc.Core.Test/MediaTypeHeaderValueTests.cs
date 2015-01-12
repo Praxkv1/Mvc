@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Microsoft.AspNet.Mvc.Core.Test
 {
-    public class MediaTypeWithQualityHeaderValueTests
+    public class MediaTypeHeaderValueTests
     {
         public static IEnumerable<object[]> SortValues
         {
@@ -57,24 +57,24 @@ namespace Microsoft.AspNet.Mvc.Core.Test
 
         [Theory]
         [MemberData(nameof(SortValues))]
-        public void SortMediaTypeWithQualityHeaderValuesByQFactor_SortsCorrectly(IEnumerable<string> unsorted, IEnumerable<string> expectedSorted)
+        public void SortMediaTypeHeaderValuesByQFactor_SortsCorrectly(IEnumerable<string> unsorted, IEnumerable<string> expectedSorted)
         {
             // Arrange
             var unsortedValues =
-                new List<MediaTypeWithQualityHeaderValue>(
-                    unsorted.Select(u => MediaTypeWithQualityHeaderValue.Parse(u)));
+                new List<MediaTypeHeaderValue>(
+                    unsorted.Select(u => MediaTypeHeaderValue.Parse(u)));
 
             var expectedSortedValues =
-                new List<MediaTypeWithQualityHeaderValue>(
-                    expectedSorted.Select(u => MediaTypeWithQualityHeaderValue.Parse(u)));
+                new List<MediaTypeHeaderValue>(
+                    expectedSorted.Select(u => MediaTypeHeaderValue.Parse(u)));
 
             // Act
-            var actualSorted = unsortedValues.OrderByDescending(m => m, MediaTypeWithQualityHeaderValueComparer.QualityComparer).ToArray();
+            var actualSorted = unsortedValues.OrderByDescending(m => m, MediaTypeHeaderValueComparer.QualityComparer).ToArray();
 
             // Assert
             for (int i = 0; i < expectedSortedValues.Count; i++)
             {
-                Assert.True(MediaTypeWithQualityHeaderValueComparer.QualityComparer.Compare(expectedSortedValues[i], actualSorted[i]) == 0);
+                Assert.True(MediaTypeHeaderValueComparer.QualityComparer.Compare(expectedSortedValues[i], actualSorted[i]) == 0);
             }
         }
     }

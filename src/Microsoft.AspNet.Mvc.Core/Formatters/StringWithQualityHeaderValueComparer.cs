@@ -11,7 +11,7 @@ namespace Microsoft.AspNet.Mvc
     /// Implementation of <see cref="IComparer{T}"/> that can compare content negotiation header fields
     /// based on their quality values (a.k.a q-values). This applies to values used in accept-charset,
     /// accept-encoding, accept-language and related header fields with similar syntax rules. See
-    /// <see cref="MediaTypeWithQualityHeaderValueComparer"/> for a comparer for media type
+    /// <see cref="MediaTypeHeaderValueComparer"/> for a comparer for media type
     /// q-values.
     /// </summary>
     internal class StringWithQualityHeaderValueComparer : IComparer<StringWithQualityHeaderValue>

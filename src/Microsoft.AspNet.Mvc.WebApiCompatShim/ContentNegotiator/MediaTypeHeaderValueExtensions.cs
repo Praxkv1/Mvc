@@ -80,6 +80,10 @@ namespace System.Net.Http.Formatting
                     return false;
                 }
             }
+            else
+            {
+                mediaType2Range = MediaTypeFormatterMatchRanking.MatchOnRequestAcceptHeaderLiteral;
+            }
 
             // So far we either have a full match or a subset match. Now check that all of
             // mediaType1's parameters are present and equal in mediatype2
